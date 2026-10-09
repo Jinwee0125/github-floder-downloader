@@ -1,0 +1,231 @@
+/* GitHub Folder Downloader — injected UI styles.
+ * Styled to blend with GitHub Primer (light + dark).
+ */
+
+html {
+  --ghdl-btn-bg: #f6f8fa;
+  --ghdl-btn-bg-hover: #eef1f4;
+  --ghdl-btn-border: rgba(31, 35, 40, 0.15);
+  --ghdl-btn-color: #24292f;
+  --ghdl-primary-bg: #1f883d;
+  --ghdl-primary-bg-hover: #1a7f37;
+  --ghdl-primary-border: rgba(31, 35, 40, 0.15);
+  --ghdl-primary-color: #ffffff;
+  --ghdl-accent: #0969da;
+  --ghdl-danger: #cf222e;
+  --ghdl-text: #24292f;
+  --ghdl-muted: #57606a;
+  --ghdl-surface: #ffffff;
+  --ghdl-border: rgba(31, 35, 40, 0.15);
+  --ghdl-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);
+  --ghdl-font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+html[data-color-mode="dark"] {
+  --ghdl-btn-bg: #21262d;
+  --ghdl-btn-bg-hover: #30363d;
+  --ghdl-btn-border: rgba(240, 246, 252, 0.1);
+  --ghdl-btn-color: #c9d1d9;
+  --ghdl-primary-bg: #238636;
+  --ghdl-primary-bg-hover: #2ea043;
+  --ghdl-primary-border: rgba(240, 246, 252, 0.1);
+  --ghdl-primary-color: #ffffff;
+  --ghdl-accent: #2f81f7;
+  --ghdl-danger: #f85149;
+  --ghdl-text: #c9d1d9;
+  --ghdl-muted: #8b949e;
+  --ghdl-surface: #161b22;
+  --ghdl-border: rgba(240, 246, 252, 0.1);
+  --ghdl-shadow: 0 8px 24px rgba(1, 4, 9, 0.6);
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-mode="light"]) {
+    --ghdl-btn-bg: #21262d;
+    --ghdl-btn-bg-hover: #30363d;
+    --ghdl-btn-border: rgba(240, 246, 252, 0.1);
+    --ghdl-btn-color: #c9d1d9;
+    --ghdl-primary-bg: #238636;
+    --ghdl-primary-bg-hover: #2ea043;
+    --ghdl-primary-border: rgba(240, 246, 252, 0.1);
+    --ghdl-primary-color: #ffffff;
+    --ghdl-accent: #2f81f7;
+    --ghdl-danger: #f85149;
+    --ghdl-text: #c9d1d9;
+    --ghdl-muted: #8b949e;
+    --ghdl-surface: #161b22;
+    --ghdl-border: rgba(240, 246, 252, 0.1);
+    --ghdl-shadow: 0 8px 24px rgba(1, 4, 9, 0.6);
+  }
+}
+
+/* ---- toolbar ---- */
+
+.ghdl-toolbar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--ghdl-font);
+}
+
+.ghdl-toolbar .ghdl-selectbar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ghdl-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 5px 12px;
+  font-family: var(--ghdl-font);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  white-space: nowrap;
+  border: 1px solid var(--ghdl-btn-border);
+  border-radius: 6px;
+  background: var(--ghdl-btn-bg);
+  color: var(--ghdl-btn-color);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.12s ease, border-color 0.12s ease;
+}
+
+.ghdl-btn:hover {
+  background: var(--ghdl-btn-bg-hover);
+}
+
+.ghdl-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.ghdl-btn--primary {
+  background: var(--ghdl-primary-bg);
+  border-color: var(--ghdl-primary-border);
+  color: var(--ghdl-primary-color);
+}
+
+.ghdl-btn--primary:hover:not(:disabled) {
+  background: var(--ghdl-primary-bg-hover);
+}
+
+.ghdl-btn--sm {
+  padding: 3px 10px;
+  font-size: 12px;
+}
+
+.ghdl-master-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--ghdl-font);
+  font-size: 13px;
+  color: var(--ghdl-text);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* ---- checkboxes ---- */
+
+.ghdl-check {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 6px;
+}
+
+input.ghdl-cb,
+input.ghdl-master {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  accent-color: var(--ghdl-accent);
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+input.ghdl-cb:disabled {
+  cursor: default;
+}
+
+/* ---- progress toast ---- */
+
+.ghdl-toast {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2147483000;
+  box-sizing: border-box;
+  width: 320px;
+  padding: 12px 14px;
+  border: 1px solid var(--ghdl-border);
+  border-radius: 8px;
+  background: var(--ghdl-surface);
+  color: var(--ghdl-text);
+  box-shadow: var(--ghdl-shadow);
+  font-family: var(--ghdl-font);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.ghdl-toast__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.ghdl-toast__title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ghdl-muted);
+}
+
+.ghdl-toast__close {
+  padding: 0 2px;
+  border: 0;
+  background: transparent;
+  color: var(--ghdl-muted);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.ghdl-toast__msg {
+  word-break: break-word;
+}
+
+.ghdl-toast__bar {
+  height: 6px;
+  margin-top: 8px;
+  border-radius: 999px;
+  background: var(--ghdl-btn-bg);
+  overflow: hidden;
+}
+
+.ghdl-toast__fill {
+  width: 0;
+  height: 100%;
+  background: var(--ghdl-accent);
+  transition: width 0.2s ease;
+}
+
+.ghdl-toast[data-kind="done"] .ghdl-toast__fill {
+  background: var(--ghdl-primary-bg);
+}
+
+.ghdl-toast[data-kind="error"] {
+  border-color: var(--ghdl-danger);
+}
+
+.ghdl-toast[data-kind="error"] .ghdl-toast__title {
+  color: var(--ghdl-danger);
+}
+
+.ghdl-toast[data-kind="error"] .ghdl-toast__fill {
+  background: var(--ghdl-danger);
+}

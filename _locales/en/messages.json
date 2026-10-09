@@ -1,0 +1,83 @@
+{
+  "extName": {
+    "message": "GitHub Folder Downloader",
+    "description": "Extension name (shown in the browser and Web Store)."
+  },
+  "extDesc": {
+    "message": "Select files or folders on a GitHub repository tree and download them as a ZIP archive.",
+    "description": "Extension description."
+  },
+
+  "btnDownload": { "message": "Download" },
+  "btnDownloadCount": { "message": "Download ({1})" },
+  "btnSelectAll": { "message": "Select all" },
+  "btnInvert": { "message": "Invert" },
+  "btnCancel": { "message": "Cancel" },
+  "a11yClose": { "message": "Close" },
+
+  "toastSelectFirst": { "message": "Select files or folders first." },
+  "toastPreparing": { "message": "Preparing download…" },
+  "toastFetchingTree": { "message": "Fetching file list…" },
+  "toastManyFiles": { "message": "Selected {1} files — packaging may take a while…" },
+  "toastDownloading": { "message": "Downloading {1}/{2}…" },
+  "toastPackaging": { "message": "Packing ZIP…" },
+  "toastDone": { "message": "Done: {1} file(s)" },
+  "toastDoneSkipped": { "message": "Done: {1} file(s), skipped {2} special item(s)" },
+  "toastDoneFailed": { "message": "Done: {1} file(s), {2} failed" },
+  "toastDoneSkippedFailed": {
+    "message": "Done: {1} file(s), skipped {2} special item(s), {3} failed"
+  },
+
+  "errNoFiles": { "message": "No downloadable files." },
+  "errAllFailed": { "message": "All downloads failed. Check your network or API rate limit." },
+  "errZipLimit": { "message": "Too many files for one ZIP (over 65535). Download in batches." },
+  "errTokenInvalid": { "message": "Invalid token. Check it in the extension settings." },
+  "errRepoNotFound": {
+    "message": "Repository not found, or it is private — configure a token in settings."
+  },
+  "errRateLimit": {
+    "message": "GitHub API rate limit reached. Retry later or configure a token in settings."
+  },
+  "errFetchTree": { "message": "Failed to fetch the file list (HTTP {1})." },
+  "errRepoTooLarge": {
+    "message": "This repository has too many files (over 100,000) — not supported."
+  },
+  "errNetwork": { "message": "Network request failed." },
+  "errDownloadFailed": { "message": "Download failed." },
+
+  "popupTitle": { "message": "GitHub Folder Downloader" },
+  "popupDesc": {
+    "message": "Click Download on a GitHub code page, select files or folders, then download them as a ZIP."
+  },
+  "popupTokenSet": { "message": "Token configured (higher rate limit)." },
+  "popupTokenUnset": { "message": "No token configured (anonymous limit ~60/hour)." },
+  "popupOpenSettings": { "message": "Open settings" },
+
+  "optionsTitle": { "message": "GitHub Folder Downloader — Settings" },
+  "optSub": {
+    "message": "Configure a GitHub Personal Access Token to raise the API rate limit from 60/hour (anonymous) to 5000/hour (authenticated) and to download private repositories."
+  },
+  "optTokenLabel": { "message": "Personal Access Token" },
+  "optTokenPlaceholder": { "message": "ghp_… or github_pat_…" },
+  "optHint": {
+    "message": "For read-only public downloads, a fine-grained token with <code>Public Repositories (read-only)</code> is enough; private repositories need <code>Contents: Read</code>."
+  },
+  "optSave": { "message": "Save" },
+  "optClear": { "message": "Clear" },
+  "optTest": { "message": "Test connection" },
+  "optTesting": { "message": "Testing…" },
+  "optSaved": { "message": "Saved." },
+  "optCleared": { "message": "Cleared." },
+  "optTestOk": { "message": "Connection OK — {1}/{2} requests remaining." },
+  "optTestFail": { "message": "Connection failed: {1}" },
+  "optUsageHeading": { "message": "How to use" },
+  "optUsage1": {
+    "message": "Open any GitHub repository code page (<code>github.com/owner/repo</code>)."
+  },
+  "optUsage2": {
+    "message": "Click the <b>Download</b> button in the header toolbar to enter selection mode."
+  },
+  "optUsage3": { "message": "Select the files/folders you want, then click <b>Download</b>." },
+  "optUsage4": { "message": "The selection is packed into a ZIP and downloaded." },
+  "optNote": { "message": "Submodules, symlinks and Git LFS files are skipped automatically." }
+}

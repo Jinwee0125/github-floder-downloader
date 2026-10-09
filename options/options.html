@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GitHub Folder Downloader — Settings</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <h1 data-i18n="extName">GitHub Folder Downloader</h1>
+      <p class="sub" data-i18n="optSub"></p>
+
+      <section class="card">
+        <label for="token" data-i18n="optTokenLabel"></label>
+        <input
+          id="token"
+          type="password"
+          data-i18n-placeholder="optTokenPlaceholder"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <p class="hint" data-i18n-html="optHint"></p>
+        <div class="row">
+          <button id="save" class="btn btn--primary" type="button" data-i18n="optSave"></button>
+          <button id="clear" class="btn" type="button" data-i18n="optClear"></button>
+          <button id="test" class="btn" type="button" data-i18n="optTest"></button>
+          <span id="status" class="status"></span>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 data-i18n="optUsageHeading"></h2>
+        <ol>
+          <li data-i18n-html="optUsage1"></li>
+          <li data-i18n-html="optUsage2"></li>
+          <li data-i18n-html="optUsage3"></li>
+          <li data-i18n="optUsage4"></li>
+        </ol>
+        <p class="hint" data-i18n="optNote"></p>
+      </section>
+    </main>
+    <script src="options.js"></script>
+  </body>
+</html>

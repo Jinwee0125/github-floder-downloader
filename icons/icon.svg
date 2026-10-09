@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="GitHub Folder Downloader">
+  <title>GitHub Folder Downloader</title>
+  <defs>
+    <linearGradient id="ghdl-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2ea043" />
+      <stop offset="1" stop-color="#1a7f37" />
+    </linearGradient>
+  </defs>
+
+  <!-- App tile -->
+  <rect x="16" y="16" width="480" height="480" rx="112" fill="url(#ghdl-bg)" />
+
+  <!-- Folder -->
+  <path
+    d="M104 184a28 28 0 0 1 28-28h84a20 20 0 0 1 15.2 7l24.6 29h124.2a28 28 0 0 1 28 28v132a28 28 0 0 1-28 28H132a28 28 0 0 1-28-28Z"
+    fill="#ffffff"
+    fill-opacity="0.97"
+  />
+
+  <!-- Download arrow -->
+  <path
+    d="M256 226v104"
+    fill="none"
+    stroke="#1f883d"
+    stroke-width="30"
+    stroke-linecap="round"
+  />
+  <path
+    d="M206 288l50 50 50-50"
+    fill="none"
+    stroke="#1f883d"
+    stroke-width="30"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
