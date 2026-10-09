@@ -15,17 +15,19 @@ Select files and folders on a GitHub repository tree page and download them as a
 - Select files and/or folders (selecting a folder downloads everything inside it).
 - Supports **select all**, **invert**, and folder **indeterminate** states.
 - Shows download/packaging **progress**.
-- Optional **Personal Access Token** to lift the GitHub API rate limit and access private repos.
+- Optional **Personal Access Token** to lift the GitHub API (file-list) rate limit and access private repos.
 - Submodules, symlinks and Git LFS pointers are skipped automatically.
 
 ## How it works
 
 1. The content script detects a repository tree page and injects the toolbar.
-2. On download, if folders were selected it fetches the full tree once via
-   `GET /repos/{owner}/{repo}/git/trees/{ref}?recursive=1` (a `truncated` response
-   means the repo has >100k files and is reported as unsupported).
-3. Each file is fetched from `raw.githubusercontent.com` with a concurrency of 6
-   and retry/backoff.
+2. On download, if folders were selected (or the repository is private) it fetches the
+   full tree once via `GET /repos/{owner}/{repo}/git/trees/{ref}?recursive=1` (a
+   `truncated` response means the repo has >100k files and is reported as unsupported).
+3. Public repositories: each file is fetched from `raw.githubusercontent.com`
+   (no token, not counted against the API quota) with a concurrency of 6 and
+   retry/backoff. Private repositories: each blob is fetched via the `api.github.com`
+   blob endpoint with `Accept: application/vnd.github.raw`.
 4. Files are packed into a ZIP (STORE, no compression) preserving
    repo-relative paths, then saved via a Blob URL.
 
@@ -36,15 +38,19 @@ Select files and folders on a GitHub repository tree page and download them as a
 3. Click **Load unpacked** and select this folder.
 4. Open any repo's code page, e.g. `https://github.com/octocat/Hello-World`.
 
-## Configure a token (optional but recommended)
+## Configure a token (optional)
+
+Only needed to raise the file-list quota or download private repositories.
 
 Open the extension popup → **Open settings**, or `chrome://extensions` → Details →
-Extension options. Paste a fine-grained token with `Public Repositories (read-only)`
-(or `Contents: Read` for private repos).
+Extension options. Paste a fine-grained token (`Contents: Read` for private repos).
+Public repositories download without a token (file bodies are served from the CDN
+and do not count against the API quota).
 
 ## Notes / limitations
 
-- Anonymous GitHub API limit is ~60 requests/hour; configure a token for 5000/hour.
+- Anonymous GitHub API (file-list) limit is ~60 requests/hour; configure a token for
+  5000/hour. Public file downloads are served from the CDN and do not count against it.
 - Repositories with more than 100,000 files are not supported (tree is truncated).
 - LFS files are downloaded as their pointer files (LFS content download is not implemented).
 - Large selections are only **warned** about, never blocked.

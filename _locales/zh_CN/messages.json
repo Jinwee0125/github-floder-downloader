@@ -29,7 +29,7 @@
   },
 
   "errNoFiles": { "message": "没有可下载的文件。" },
-  "errAllFailed": { "message": "所有文件都下载失败，请检查网络或 API 速率限制。" },
+  "errAllFailed": { "message": "所有文件都下载失败，请检查网络、Token 或 API 速率限制。" },
   "errZipLimit": { "message": "文件数量超过 ZIP 上限（65535），请分批下载。" },
   "errTokenInvalid": { "message": "Token 无效，请在扩展设置中检查。" },
   "errRepoNotFound": { "message": "仓库不存在，或私有仓库需要在设置中配置 Token。" },
@@ -40,19 +40,19 @@
   "errDownloadFailed": { "message": "下载失败。" },
 
   "popupTitle": { "message": "GitHub 文件夹下载器" },
-  "popupDesc": { "message": "在 GitHub 代码页点击 Download 按钮，勾选文件/文件夹后打包为 ZIP 下载。" },
-  "popupTokenSet": { "message": "已配置 Token（速率限制已提升）。" },
-  "popupTokenUnset": { "message": "未配置 Token（匿名速率限制约 60 次/小时）。" },
+  "popupDesc": { "message": "在 GitHub 代码页点击 下载 按钮，勾选文件/文件夹后打包为 ZIP 下载。" },
+  "popupTokenSet": { "message": "已配置 Token（提升文件列表 API 配额并支持私有仓库）。" },
+  "popupTokenUnset": { "message": "未配置 Token。公开仓库文件下载不受影响；文件列表 API 配额约 60 次/小时。" },
   "popupOpenSettings": { "message": "打开设置" },
 
   "optionsTitle": { "message": "GitHub 文件夹下载器 — 设置" },
   "optSub": {
-    "message": "配置 GitHub Personal Access Token 可将 API 速率限制从匿名 60 次/小时提升到认证 5000 次/小时，并支持下载私有仓库。"
+    "message": "配置 GitHub Personal Access Token 可将 API（文件列表）速率限制从匿名 60 次/小时提升到认证 5000 次/小时，并支持下载私有仓库；公开仓库无需 Token 即可下载。"
   },
   "optTokenLabel": { "message": "Personal Access Token" },
   "optTokenPlaceholder": { "message": "ghp_… 或 github_pat_…" },
   "optHint": {
-    "message": "公开仓库只读下载建议使用 fine-grained token，仅勾选 <code>Public Repositories (read-only)</code>；私有仓库需要 <code>Contents: Read</code>。"
+    "message": "公开仓库无需 Token（Token 仅提升文件列表配额）；私有仓库需 fine-grained token 勾选 <code>Contents: Read</code>。"
   },
   "optSave": { "message": "保存" },
   "optClear": { "message": "清除" },
@@ -64,7 +64,7 @@
   "optTestFail": { "message": "连接失败：{1}" },
   "optUsageHeading": { "message": "使用说明" },
   "optUsage1": { "message": "打开任意 GitHub 仓库的代码页（<code>github.com/owner/repo</code>）。" },
-  "optUsage2": { "message": "点击头部工具栏上的 <b>Download</b> 按钮进入选择模式。" },
+  "optUsage2": { "message": "点击头部工具栏上的 <b>下载</b> 按钮进入选择模式。" },
   "optUsage3": { "message": "勾选要下载的文件/文件夹，点击 <b>下载</b>。" },
   "optUsage4": { "message": "所选内容会打包为 ZIP 并下载。" },
   "optNote": { "message": "子模块、符号链接与 Git LFS 文件会被自动跳过。" }

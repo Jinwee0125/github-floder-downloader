@@ -29,7 +29,7 @@
   },
 
   "errNoFiles": { "message": "No downloadable files." },
-  "errAllFailed": { "message": "All downloads failed. Check your network or API rate limit." },
+  "errAllFailed": { "message": "All downloads failed. Check your network, token, or API rate limit." },
   "errZipLimit": { "message": "Too many files for one ZIP (over 65535). Download in batches." },
   "errTokenInvalid": { "message": "Invalid token. Check it in the extension settings." },
   "errRepoNotFound": {
@@ -49,18 +49,18 @@
   "popupDesc": {
     "message": "Click Download on a GitHub code page, select files or folders, then download them as a ZIP."
   },
-  "popupTokenSet": { "message": "Token configured (higher rate limit)." },
-  "popupTokenUnset": { "message": "No token configured (anonymous limit ~60/hour)." },
+  "popupTokenSet": { "message": "Token configured (raises the file-list API limit and enables private repos)." },
+  "popupTokenUnset": { "message": "No token. Public file downloads are unaffected; the file-list API limit is ~60/hour." },
   "popupOpenSettings": { "message": "Open settings" },
 
   "optionsTitle": { "message": "GitHub Folder Downloader — Settings" },
   "optSub": {
-    "message": "Configure a GitHub Personal Access Token to raise the API rate limit from 60/hour (anonymous) to 5000/hour (authenticated) and to download private repositories."
+    "message": "Configure a GitHub Personal Access Token to raise the API (file-list) rate limit from 60/hour (anonymous) to 5000/hour (authenticated) and to download private repositories. Public repositories download without a token."
   },
   "optTokenLabel": { "message": "Personal Access Token" },
   "optTokenPlaceholder": { "message": "ghp_… or github_pat_…" },
   "optHint": {
-    "message": "For read-only public downloads, a fine-grained token with <code>Public Repositories (read-only)</code> is enough; private repositories need <code>Contents: Read</code>."
+    "message": "A token is optional for public repositories (it only lifts the file-list limit); private repositories need a fine-grained token with <code>Contents: Read</code>."
   },
   "optSave": { "message": "Save" },
   "optClear": { "message": "Clear" },

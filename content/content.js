@@ -485,11 +485,40 @@
     return Array.isArray(data.tree) ? data.tree : [];
   }
 
-  async function fetchRaw(owner, repo, ref, path, token) {
+  async function fetchRaw(owner, repo, ref, path) {
+    // Public repositories: raw.githubusercontent.com is CDN-served and does not
+    // count against the API rate limit. Do NOT send an Authorization header here:
+    // it is not a CORS-safelisted header, so it triggers a preflight that the raw
+    // host rejects (HTTP 403 without Access-Control-Allow-Headers), which blocks
+    // every request. Private repos are fetched via fetchBlob() instead.
     const url = `https://raw.githubusercontent.com/${owner}/${repo}/${encodePath(ref)}/${encodePath(path)}`;
-    const headers = {};
-    if (token) headers.Authorization = 'Bearer ' + token;
+    const res = await fetchWithRetry(url, {});
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return new Uint8Array(await res.arrayBuffer());
+  }
+
+  async function fetchRepoMeta(owner, repo, token) {
+    const url = `https://api.github.com/repos/${owner}/${repo}`;
+    const res = await fetchWithRetry(url, { headers: apiHeaders(token) });
+    if (res.status === 401) throw new Error(msg('errTokenInvalid'));
+    if (res.status === 404) throw new Error(msg('errRepoNotFound'));
+    if (res.status === 403 || res.status === 429) throw new Error(msg('errRateLimit'));
+    if (!res.ok) throw new Error(msg('errFetchTree', res.status));
+    const data = await res.json();
+    return { private: !!data.private };
+  }
+
+  async function fetchBlob(owner, repo, sha, token) {
+    // Private repositories: the raw host cannot be called with an Authorization
+    // header from the page (its CORS preflight fails). api.github.com allows the
+    // header, so fetch the blob there and request raw bytes directly.
+    const url = `https://api.github.com/repos/${owner}/${repo}/git/blobs/${sha}`;
+    const headers = apiHeaders(token);
+    headers.Accept = 'application/vnd.github.raw';
     const res = await fetchWithRetry(url, { headers });
+    if (res.status === 401) throw new Error(msg('errTokenInvalid'));
+    if (res.status === 404) throw new Error(msg('errRepoNotFound'));
+    if (res.status === 403 || res.status === 429) throw new Error(msg('errRateLimit'));
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return new Uint8Array(await res.arrayBuffer());
   }
@@ -542,10 +571,23 @@
       let filePaths = [];
       let skipped = 0;
 
-      if (hasDirs) {
+      // A token does not make raw.githubusercontent.com usable from the page (its
+      // CORS preflight rejects the Authorization header). Determine whether the
+      // repository is private so downloads can be routed through the blob API.
+      let isPrivate = false;
+      if (token) {
+        const meta = await fetchRepoMeta(state.owner, state.repo, token);
+        isPrivate = meta.private;
+      }
+
+      const shaByPath = new Map();
+      if (hasDirs || isPrivate) {
         showToast(msg('toastFetchingTree'), 'progress', null);
         const tree = await fetchTree(state.owner, state.repo, state.ref, token);
         const wanted = new Set();
+        for (const e of tree) {
+          if (e.type === 'blob' && e.sha) shaByPath.set(e.path, e.sha);
+        }
 
         for (const p of entries) {
           if (state.dirs.has(p)) {
@@ -589,7 +631,14 @@
 
       await runPool(filePaths, CONCURRENCY, async (path) => {
         try {
-          const bytes = await fetchRaw(state.owner, state.repo, state.ref, path, token);
+          let bytes;
+          if (isPrivate) {
+            const sha = shaByPath.get(path);
+            if (!sha) throw new Error('HTTP 404'); // path missing from the tree
+            bytes = await fetchBlob(state.owner, state.repo, sha, token);
+          } else {
+            bytes = await fetchRaw(state.owner, state.repo, state.ref, path);
+          }
           parts.push({ name: path, data: bytes });
         } catch (_) {
           failed++;
