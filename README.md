@@ -8,6 +8,10 @@ Select files and folders on a GitHub repository tree page and download them as a
 
 **English** · [简体中文](README.zh-CN.md)
 
+## Demo
+
+![demo](demo.gif)
+
 ## Features
 
 - Adds a **Download** button to the code view header, just left of **Add file**.
